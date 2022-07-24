@@ -22,7 +22,6 @@ return new class extends Migration
             $table->unsignedBigInteger('phone')->unique();
             $table->string('password');
             $table->text('address');
-            $table->string('avatar');
             $table->string('skype_id')->nullable();
             $table->enum('gender', ['male', 'female', 'other']);
             $table->rememberToken();

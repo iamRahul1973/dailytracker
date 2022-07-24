@@ -15,7 +15,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::insert([
+        $roles = [
             ['name' => 'admin'],
             ['name' => 'project manager'],
             ['name' => 'employee'],
@@ -24,6 +24,10 @@ class RoleSeeder extends Seeder
             ['name' => 'software tester'],
             ['name' => 'seo'],
             ['name' => 'graphic designer'],
-        ]);
+        ];
+
+        foreach ($roles as $role) {
+            Role::create($role);
+        }
     }
 }
