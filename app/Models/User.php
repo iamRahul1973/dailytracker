@@ -57,4 +57,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(EmployeeExperience::class);
     }
+
+    public function projectsManaging()
+    {
+        return $this->hasMany(Project::class, 'manager');
+    }
+
+    public function projectsPartOf()
+    {
+        return $this->belongsToMany(Project::class, 'project_squad');
+    }
 }
