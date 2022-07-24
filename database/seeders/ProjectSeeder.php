@@ -17,7 +17,7 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 1; $i++) {
+        for ($i=0; $i < 8; $i++) {
             $manager = User::role('project manager')->inRandomOrder()->first();
             $technologies = Technology::inRandomOrder()->get()->take(2);
             $members = User::inRandomOrder()->get()->take(3);
