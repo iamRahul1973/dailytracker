@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('employee_experiences', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\User::class)->restrictOnDelete();
             $table->string('company');
             $table->string('address');
             $table->string('span');

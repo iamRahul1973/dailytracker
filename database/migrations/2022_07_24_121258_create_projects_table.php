@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->foreignIdFor(User::class, 'manager');
+            $table->foreignIdFor(User::class, 'manager_id')->nullOnDelete();
             $table->timestamps();
         });
     }

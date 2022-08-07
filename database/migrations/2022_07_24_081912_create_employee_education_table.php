@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('employee_education', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\User::class)->restrictOnDelete();
             $table->string('course');
             $table->string('college');
             $table->date('completed_on');

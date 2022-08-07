@@ -17,8 +17,8 @@ return new class extends Migration
     {
         Schema::create('flavours', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Project::class);
-            $table->foreignIdFor(Technology::class);
+            $table->foreignIdFor(Project::class)->restrictOnDelete();
+            $table->foreignIdFor(Technology::class)->restrictOnDelete();
             $table->timestamps();
         });
     }

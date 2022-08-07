@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\User::class)->restrictOnDelete();
             $table->string('guardain_name');
             $table->string('guardian_relation');
             $table->string('guardian_email')->nullable();

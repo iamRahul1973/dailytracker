@@ -18,11 +18,11 @@ return new class extends Migration
     {
         Schema::create('progress', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Task::class);
+            $table->foreignIdFor(Task::class)->restrictOnDelete();
             $table->date('date');
-            $table->foreignIdFor(User::class, 'employee');
+            $table->foreignIdFor(User::class, 'employee')->restrictOnDelete();
             $table->unsignedSmallInteger('time_taken')->comment('In Minutes');
-            $table->enum('status', Progress::status())->default('not_started');
+            $table->enum('status', array_keys(Progress::status()))->default('not-started');
             $table->text('remarks')->nullable();
             $table->timestamps();
         });

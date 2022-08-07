@@ -17,8 +17,8 @@ return new class extends Migration
     {
         Schema::create('project_squad', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Project::class);
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Project::class)->restrictOnDelete();
+            $table->foreignIdFor(User::class)->restrictOnDelete();
             $table->timestamps();
         });
     }
