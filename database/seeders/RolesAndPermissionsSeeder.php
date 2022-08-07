@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
-class RoleSeeder extends Seeder
+class RolesAndPermissionsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,9 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
+        // Reset cached roles and permissions
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
         $roles = [
             ['name' => 'admin'],
             ['name' => 'project manager'],
