@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Progress extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
 
     public function task()
@@ -22,6 +23,17 @@ class Progress extends Model
 
     public static function status()
     {
-        return ['not_started', 'in_progress', 'stuck', 'on_hold', 'completed'];
+        return [
+            'not-started' => 'bg-gray-500',
+            'in-progress' => 'bg-purple-500',
+            'hold' => 'bg-pink-500',
+            'stuck' => 'bg-red-500',
+            'completed' => 'bg-green-500'
+        ];
+    }
+
+    public static function getClass($status)
+    {
+        return self::status()[$status];
     }
 }

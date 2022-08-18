@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Admin
-        (User::factory()->create())->assignRole('admin');
+        (User::factory()->create(['email' => 'admin@dailytracker.app']))->assignRole('admin');
 
         // Project Managers
         foreach (User::factory()->count(6)->create() as $manager) {

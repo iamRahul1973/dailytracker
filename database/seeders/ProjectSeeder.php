@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\Technology;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,15 +18,12 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 8; $i++) {
-            $manager = User::role('project manager')->inRandomOrder()->first();
-            $technologies = Technology::inRandomOrder()->get()->take(2);
-            $members = User::inRandomOrder()->get()->take(3);
-
-            Project::factory()
-                ->hasAttached($technologies, relationship: 'technologies')
-                ->hasAttached($members, relationship: 'members')
-                ->create(['manager' => $manager->id]);
-        }
+        Project::factory()
+            ->for(User::role('project manager')->inRandomOrder()->first(), 'manager')
+            ->hasAttached(Technology::inRandomOrder()->get()->take(2), relationship: 'technologies')
+            ->hasAttached(User::inRandomOrder()->get()->take(3), relationship: 'members')
+            ->has(Task::factory()->count(3))
+            ->count(8)
+            ->create();
     }
 }

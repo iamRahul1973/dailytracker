@@ -12,206 +12,43 @@
                 <button
                     class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm"
                     @click="$dispatch('open-add-task-modal')"
-                    >Add New Task</button>
+                >
+                    Add New Task
+                </button>
+
+                <button
+                    class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm"
+                    @click="$dispatch('open-assign-task-modal')"
+                >
+                    Assign Task
+                </button>
             </div>
 
-            <div
-                x-data="{ dateFilter: false }"
-                class="bg-indigo-600 shadow-sm sm:rounded-lg"
-            >
-                <div class="p-6 bg-indigo-600 text-white flex justify-between font-semibold">
-                    <div class="cursor-pointer text-orange-400 border-b border-orange-500">Today</div>
-                    <div class="cursor-pointer">This Week</div>
-                    <div class="cursor-pointer">This Month</div>
-                    <div
-                        class="cursor-pointer relative transition duration-150 ease-in flex items-center"
-                        x-data="{open : false}"
-                        @click="open = ! open"
-                    >
-                        Previous Months
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                        <ul
-                            x-show="open"
-                            @click.outside="open = false"
-                            x-transition
-                            class="absolute w-44 bg-white rounded-xl py-3 md:ml-8 top-8 md:top-8 right-0 md:left-16 text-gray-800 pl-6 text-sm font-normal leading-8 drop-shadow-lg"
-                        >
-                            <li class="cursor-pointer">July 2022</li>
-                            <li class="cursor-pointer">June 2022</li>
-                            <li class="cursor-pointer">May 2022</li>
-                            <li class="cursor-pointer">April 2022</li>
-                            <li class="cursor-pointer">March 2022</li>
-                            <li class="cursor-pointer">February 2022</li>
-                        </ul>
-                    </div>
-                    <div
-                        class="cursor-pointer flex items-center"
-                        @click="dateFilter = ! dateFilter"
-                    >
-                        Custom Date Range
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="p-6" x-show="dateFilter" x-transition.height>
-                    <div class="flex space-x-4 text-white border border-white p-6 rounded-md">
-                        <div class="flex-1">
-                            <label for="start_date" class="mb-2 text-sm block">Starts on</label>
-                            <input type="date" class="form-input rounded-lg w-full border-gray-300 text-gray-700">
-                        </div>
-                        <div class="flex-1">
-                            <label for="start_date" class="mb-2 text-sm block">Ends on</label>
-                            <input type="date" class="form-input rounded-lg w-full border-gray-300 text-gray-700">
-                        </div>
-                        <div class="flex-none place-self-end">
-                            <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-white text-base font-medium text-black hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">Deactivate</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <livewire:status-filters />
+            <livewire:trackersheet />
+        </div>
+    </div>
 
-            <div class="mt-8">
-                <table class="table-auto w-full text-sm border-separate border-spacing-y-3">
-                    <thead class="text-lef">
-                        <tr>
-                            <th class="p-4 text-left">Project</th>
-                            <th class="p-4 text-left">Owner</th>
-                            <th class="p-4 text-left">Task</th>
-                            <th class="p-4 text-left">Developer</th>
-                            <th class="p-4 text-left">Estimated</th>
-                            <th class="p-4 text-left">Time Taken</th>
-                            <th class="p-4 text-left">Status</th>
-                            <th class="p-4 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th colspan="8" class="text-left pb-4">
-                                <span class="bg-orange-500 text-white px-3 py-2 rounded-lg">2011 July 28</span>
-                            </th>
-                        </tr>
-                        <tr class="bg-white shadow-md">
-                            <td class="px-4 py-2 text-left">Cloud IMS</td>
-                            <td class="px-4 py-2 text-left">
-                                <img src="https://source.unsplash.com/random/50x50?face" alt="avatar" class="rounded-full">
-                            </td>
-                            <td class="px-4 py-2 text-left">Forgot Password</td>
-                            <td class="px-4 py-2 text-left">
-                                <img src="https://source.unsplash.com/random/50x50?face" alt="avatar" class="mr-2 rounded-full">
-                            </td>
-                            <td class="px-4 py-2 text-left">4 Hrs</td>
-                            <td class="px-4 py-2 text-left">6 Hrs</td>
-                            <td class="px-4 py-2 text-left">
-                                <span class="bg-pink-500 text-white px-2 py-1 rounded-md font-semibold text-xs">Hold</span>
-                            </td>
-                            <td class="px-4 py-2 text-right relative" x-data="{ showActions : false }">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-6 w-6 ml-auto cursor-pointer"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    @click="showActions = ! showActions"
-                                >
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                                </svg>
-                                <ul
-                                    x-show="showActions"
-                                    x-transition
-                                    @click.outside="showActions = false"
-                                    class="bg-slate-100 rounded-lg border border-slate-200 w-40 drop-shadow-md text-left px-4 py-4 leading-6 absolute right-6"
-                                >
-                                    <li>Edit</li>
-                                    <li>Update Progress</li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr class="bg-white shadow-md">
-                            <td class="px-4 py-2 text-left">Cloud IMS</td>
-                            <td class="px-4 py-2 text-left">
-                                <img src="https://source.unsplash.com/random/50x50?face" alt="avatar" class="rounded-full">
-                            </td>
-                            <td class="px-4 py-2 text-left">Forgot Password</td>
-                            <td class="px-4 py-2 text-left">
-                                <img src="https://source.unsplash.com/random/50x50?face" alt="avatar" class="mr-2 rounded-full">
-                            </td>
-                            <td class="px-4 py-2 text-left">4 Hrs</td>
-                            <td class="px-4 py-2 text-left">6 Hrs</td>
-                            <td class="px-4 py-2 text-left">
-                                <span class="bg-green-500 text-white px-2 py-1 rounded-md font-semibold text-xs">Completed</span>
-                            </td>
-                            <td class="px-4 py-2 text-right">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr class="bg-white shadow-md">
-                            <td class="px-4 py-2 text-left">Cloud IMS</td>
-                            <td class="px-4 py-2 text-left">
-                                <img src="https://source.unsplash.com/random/50x50?face" alt="avatar" class="rounded-full">
-                            </td>
-                            <td class="px-4 py-2 text-left">Forgot Password</td>
-                            <td class="px-4 py-2 text-left">
-                                <img src="https://source.unsplash.com/random/50x50?face" alt="avatar" class="mr-2 rounded-full">
-                            </td>
-                            <td class="px-4 py-2 text-left">4 Hrs</td>
-                            <td class="px-4 py-2 text-left">6 Hrs</td>
-                            <td class="px-4 py-2 text-left">
-                                <span class="bg-purple-500 text-white px-2 py-1 rounded-md font-semibold text-xs">In Progress</span>
-                            </td>
-                            <td class="px-4 py-2 text-right">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                                </svg>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th colspan="7" class="text-left py-4">
-                                <span class="bg-orange-500 text-white px-3 py-2 rounded-lg">2011 July 28</span>
-                            </th>
-                        </tr>
-                        <tr class="bg-white shadow-md">
-                            <td class="px-4 py-2 text-left">Cloud IMS</td>
-                            <td class="px-4 py-2 text-left">
-                                <img src="https://source.unsplash.com/random/50x50?face" alt="avatar" class="rounded-full">
-                            </td>
-                            <td class="px-4 py-2 text-left">Forgot Password</td>
-                            <td class="px-4 py-2 text-left">
-                                <img src="https://source.unsplash.com/random/50x50?face" alt="avatar" class="mr-2 rounded-full">
-                            </td>
-                            <td class="px-4 py-2 text-left">4 Hrs</td>
-                            <td class="px-4 py-2 text-left">6 Hrs</td>
-                            <td class="px-4 py-2 text-left" colspan="2">
-                                <span class="bg-red-500 text-white px-2 py-1 rounded-md font-semibold text-xs">Stuck</span>
-                            </td>
-                        </tr>
-                        <tr class="bg-white shadow-md">
-                            <td class="px-4 py-2 text-left">Cloud IMS</td>
-                            <td class="px-4 py-2 text-left">
-                                <img src="https://source.unsplash.com/random/50x50?face" alt="avatar" class="rounded-full">
-                            </td>
-                            <td class="px-4 py-2 text-left">Forgot Password</td>
-                            <td class="px-4 py-2 text-left">
-                                <img src="https://source.unsplash.com/random/50x50?face" alt="avatar" class="mr-2 rounded-full">
-                            </td>
-                            <td class="px-4 py-2 text-left">4 Hrs</td>
-                            <td class="px-4 py-2 text-left">6 Hrs</td>
-                            <td class="px-4 py-2 text-left" colspan="2">
-                                <span class="bg-gray-500 text-white px-2 py-1 rounded-md font-semibold text-xs">Not Started Yet</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div
+        x-data="{ showAssignTask : false }"
+        x-show="showAssignTask"
+        x-cloak
+        @open-assign-task-modal.window="showAssignTask = true"
+        @close-assign-task-modal.window="showAssignTask = false"
+        @keydown.escape.window="showAssignTask = false"
+        x-transition.opacity
+        class="relative z-10"
+        aria-labelledby="modal-title"
+        role="dialog"
+        aria-modal="true"
+    >
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+        <div class="fixed z-10 inset-0 overflow-y-auto">
+            <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+                <div class="relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+                    <livewire:assign-task />
+                </div>
             </div>
         </div>
     </div>
@@ -220,11 +57,13 @@
         x-data="{ showAddTask : false }"
         x-show="showAddTask"
         @open-add-task-modal.window="showAddTask = true"
+        @keydown.escape.window="showAddTask = false"
         x-transition.opacity
         class="relative z-10"
         aria-labelledby="modal-title"
         role="dialog"
         aria-modal="true"
+        x-cloak
     >
         <!--
             Background backdrop, show/hide based on modal state.
@@ -364,4 +203,57 @@
             </div>
         </div>
     </div> --}}
+
+    {{-- Toastr --}}
+    <div
+        x-data="{
+            show : false,
+            type : 'info',
+            message : 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
+            get color() {
+                switch (this.type) {
+                    case 'success':
+                        return 'green';
+                        break;
+                    case 'error':
+                        return 'red';
+                        break;
+                    case 'warning':
+                        return 'yellow';
+                        break;
+                    default:
+                        return 'blue';
+                        break;
+                }
+            }
+        }"
+        x-show="show"
+        x-cloak
+        x-transition.opacity
+        @toastr.window="
+            show = true;
+            message = $event.detail.message;
+            type = $event.detail.type;
+            setTimeout(() => show = false, 2000)
+        "
+        class="fixed top-1 right-1 drop-shadow-lg px-6 pt-2 pb-3 rounded-md border-l-4 w-72"
+        :class="`border-${color}-500 bg-${color}-300`"
+    >
+        <h4
+            class="font-semibold pb-2"
+            :class="`text-${color}-700`"
+            x-text="type.toUpperCase()"
+        ></h4>
+        <p
+            class="text-sm"
+            :class="`text-${color}-500`"
+            x-text="message"
+        ></p>
+        <span
+            class="absolute top-1 right-2 cursor-pointer"
+            @click="show = false"
+        >
+            &times;
+        </span>
+    </div>
 </x-app-layout>

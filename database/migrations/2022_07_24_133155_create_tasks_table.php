@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Project::class)->restrictOnDelete();
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->tinyText('description')->nullable();
             $table->unsignedSmallInteger('estimated')->comment('In Minutes');
             $table->timestamps();
         });

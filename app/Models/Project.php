@@ -11,7 +11,7 @@ class Project extends Model
 
     public function manager()
     {
-        return $this->belongsTo(User::class, 'manager');
+        return $this->belongsTo(User::class);
     }
 
     public function technologies()
