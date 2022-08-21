@@ -42,10 +42,10 @@
                             <img src="{{ $activity->assignedTo->gravatar() }}" alt="avatar" class="mr-2 rounded-full w-10">
                         </td>
                         <td class="px-4 py-2 text-left">
-                            {{ minutesToHours($activity->task->estimated) }}
+                            {{ minutes_to_hours($activity->task->estimated) }}
                         </td>
                         <td class="px-4 py-2 text-left">
-                            {{ $activity->task->time_taken ? minutesToHours($activity->task->time_taken) : '-' }}
+                            {{ $activity->task->time_taken ? minutes_to_hours($activity->task->time_taken) : '-' }}
                         </td>
                         <td class="px-4 py-2 text-left">
                             <span class="{{ \App\Models\Progress::getClass($activity->status) }} text-white px-2 py-1 rounded-md font-semibold text-xs">

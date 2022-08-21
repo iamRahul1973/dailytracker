@@ -27,8 +27,3 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-
-function minutesToHours($mins)
-{
-    return intdiv($mins, 60) . ':' . ($mins % 60);
-}
