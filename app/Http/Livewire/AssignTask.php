@@ -28,10 +28,17 @@ class AssignTask extends Component
         'note' => 'nullable|string|min:3|max:255'
     ];
 
+    protected $listeners = ['newTaskAdded'];
+
     public function mount()
     {
         $this->projectList = $this->getProjects();
         $this->setDateToToday();
+    }
+
+    public function newTaskAdded()
+    {
+        $this->reset(['project', 'task', 'taskList']);
     }
 
     public function updatedProject()
