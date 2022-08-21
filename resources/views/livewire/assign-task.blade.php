@@ -62,9 +62,11 @@
                     wire:model="developer"
                 >
                     <option value="">Select a Developer</option>
-                    @foreach ($developerList as $developer)
-                        <option value="{{ $developer->id }}">{{ $developer->name }}</option>
-                    @endforeach
+                    @isset($developerList)
+                        @foreach ($developerList as $developer)
+                            <option value="{{ $developer->id }}">{{ $developer->name }}</option>
+                        @endforeach
+                    @endisset
                 </select>
                 @error('developer')
                     <p class="text-red-500 text-sm pt-2">{{ $message }}</p>

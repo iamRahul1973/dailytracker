@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
 use Livewire\Component;
+use Auth;
 
 class AssignTask extends Component
 {
@@ -29,14 +30,17 @@ class AssignTask extends Component
 
     public function mount()
     {
-        $this->projectList = Project::all();
-        $this->developerList = User::role('employee')->get();
+        $this->projectList = $this->getProjects();
         $this->setDateToToday();
     }
 
     public function updatedProject()
     {
         $this->taskList = Task::where('project_id', $this->project)->get();
+
+        $this->developerList = User::role('employee')
+            ->whereRelation('projectsPartOf', 'project_id', $this->project)
+            ->get();
     }
 
     public function save()
@@ -67,5 +71,14 @@ class AssignTask extends Component
     private function setDateToToday()
     {
         $this->date = now()->format('Y-m-d');
+    }
+
+    private function getProjects()
+    {
+        if (Auth::user()->hasRole('project manager')) {
+            return Project::where('manager_id', auth()->user()->id)->get();
+        }
+
+        return Project::all();
     }
 }
