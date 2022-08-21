@@ -20,7 +20,6 @@ class AssignTaskTest extends TestCase
     /** @test */
     function component_is_present_only_for_admin_and_managers()
     {
-        $this->seed(RolesAndPermissionsSeeder::class);
         $admin = self::createUser('admin');
         $projectManager = self::createUser('project manager');
         $developer = self::createUser('employee');
@@ -38,7 +37,6 @@ class AssignTaskTest extends TestCase
     /** @test */
     function task_can_be_assigned()
     {
-        $this->seed(RolesAndPermissionsSeeder::class);
         $admin = self::createUser('admin');
         $developer =self::createUser('employee');
         $project = Project::factory()->create(['name' => 'Zeetorm']);
@@ -75,9 +73,7 @@ class AssignTaskTest extends TestCase
     /** @test */
     function project_manager_can_only_assign_tasks_of_the_projects_he_manages()
     {
-        $this->seed(RolesAndPermissionsSeeder::class);
         $manager = self::createUser('project manager');
-
         $projectHeOwns = Project::factory()->for($manager, 'manager')->create();
         $projectHeDoesntOwn = Project::factory()->create();
 
@@ -90,7 +86,6 @@ class AssignTaskTest extends TestCase
     /** @test */
     function task_can_be_assigned_only_to_one_of_its_squad_member()
     {
-        $this->seed(RolesAndPermissionsSeeder::class);
         $manager = self::createUser('project manager');
         $roleEmployee = Role::findByName('employee');
 
@@ -113,11 +108,5 @@ class AssignTaskTest extends TestCase
             ->set('project', $billing->id)
             ->assertSee('Sreenath Sahadevan')
             ->assertDontSee('Rahul K');
-    }
-
-    private static function createUser($role)
-    {
-        ($admin = User::factory()->create())->assignRole($role);
-        return $admin;
     }
 }
