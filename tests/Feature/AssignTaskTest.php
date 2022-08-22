@@ -7,9 +7,8 @@ use App\Http\Livewire\Trackersheet;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
-use Database\Seeders\RolesAndPermissionsSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
@@ -20,9 +19,7 @@ class AssignTaskTest extends TestCase
     /** @test */
     function component_is_present_only_for_admin_and_managers()
     {
-        $admin = self::createUser('admin');
-        $projectManager = self::createUser('project manager');
-        $developer = self::createUser('employee');
+        [$admin, $projectManager, $developer] = self::createUser(['admin', 'project manager', 'employee']);
 
         /** @var \Illuminate\Contracts\Auth\Authenticatable $admin */
         $this->actingAs($admin)->get(route('trackersheet'))->assertSeeLivewire('trackersheet');
@@ -37,8 +34,7 @@ class AssignTaskTest extends TestCase
     /** @test */
     function task_can_be_assigned()
     {
-        $admin = self::createUser('admin');
-        $developer =self::createUser('employee');
+        [$admin, $developer] = self::createUser(['admin', 'employee']);
         $project = Project::factory()->create(['name' => 'Zeetorm']);
         $task = Task::factory()->for($project)->create(['name' => 'Authentication']);
 
