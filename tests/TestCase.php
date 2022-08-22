@@ -13,9 +13,13 @@ abstract class TestCase extends BaseTestCase
     protected $seed = true;
     protected $seeder = RolesAndPermissionsSeeder::class;
 
-    protected static function createUser($role)
+    protected static function createUser($roles)
     {
-        ($user = User::factory()->create())->assignRole($role);
+        if (is_array($roles)) {
+            return array_map(fn ($role) => self::createUser($role), $roles);
+        }
+
+        ($user = User::factory()->create())->assignRole($roles);
         return $user;
     }
 }

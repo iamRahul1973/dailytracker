@@ -20,6 +20,7 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         Permission::create(['name' => 'assign task']);
+        Permission::create(['name' => 'add task']);
 
         $roles = collect(self::getRoles())->map(fn ($role) => ['name' => $role, 'guard_name' => 'web']);
         Role::insert($roles->toArray());
@@ -28,7 +29,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $admin->givePermissionTo(Permission::all());
 
         $projectManager = Role::findByName('project manager');
-        $projectManager->givePermissionTo('assign task');
+        $projectManager->givePermissionTo(['assign task', 'add task']);
     }
 
     private static function getRoles()
